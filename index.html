@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Студия танца «Второе дыхание»</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #fff;
+      color: #222;
+    }
+    header {
+      background: linear-gradient(to right, #ff6f61, #ff9472);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+    header p {
+      margin: 10px 0;
+      font-size: 1.2em;
+    }
+    .btn {
+      background-color: white;
+      color: #ff6f61;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    .form-block input, .form-block textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .form-block button {
+      background-color: #ff6f61;
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    footer {
+      background: #f2f2f2;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Студия танца «Второе дыхание»</h1>
+    <p>Самара, от 3 до 14 лет — с любовью к каждому ребёнку</p>
+    <button class="btn" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'});">Записаться на пробное</button>
+  </header>
+
+  <section>
+    <h2>Что вы получите</h2>
+    <ul>
+      <li>Тёплую атмосферу и индивидуальный подход</li>
+      <li>Гимнастику, современный и классический танец</li>
+      <li>Победы на конкурсах и концерты</li>
+      <li>Развитие пластики и уверенности</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Отзывы родителей</h2>
+    <p><strong>Мария К.:</strong> Моя дочка с первого занятия влюбилась в студию! Уже через месяц она выступала на сцене.</p>
+    <p><strong>Ольга В.:</strong> Видно, как с детьми работают с душой. Моя Соня стала увереннее и с радостью ходит на каждое занятие.</p>
+    <p><strong>Татьяна Л.:</strong> Настоящая школа характера и творчества! Сын стал выступать на конкурсах и перестал стесняться.</p>
+    <p><strong>Ирина С.:</strong> Радует атмосфера. Дети развиваются не только физически, но и творчески.</p>
+  </section>
+
+  <section id="form" class="form-block">
+    <h2>Записаться на бесплатное пробное занятие</h2>
+    <form id="tgForm">
+      <input type="text" id="name" placeholder="Ваше имя" required />
+      <input type="text" id="age" placeholder="Возраст ребёнка" required />
+      <input type="tel" id="phone" placeholder="Телефон" required />
+      <button type="submit">Отправить</button>
+    </form>
+    <p id="status" style="margin-top: 10px;"></p>
+  </section>
+
+  <footer>
+    Самара, ул. Нестора Постникова, 5 | <a href="https://vk.com/studiodance63" target="_blank">Мы ВКонтакте</a>
+  </footer>
+
+  <script>
+    document.getElementById('tgForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const age = document.getElementById('age').value;
+      const phone = document.getElementById('phone').value;
+      const message = `Новая заявка:\nИмя: ${name}\nВозраст ребёнка: ${age}\nТелефон: ${phone}`;
+
+      fetch('https://api.telegram.org/bot7613648654:AAEF344UUyxqWhcj4k43B0HA5hJmks3j9cg/sendMessage', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          chat_id: '564040651',
+          text: message
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('status').textContent = 'Заявка успешно отправлена!';
+        document.getElementById('tgForm').reset();
+      })
+      .catch(err => {
+        document.getElementById('status').textContent = 'Ошибка отправки. Попробуйте позже.';
+      });
+    });
+  </script>
+
+</body>
+</html>
