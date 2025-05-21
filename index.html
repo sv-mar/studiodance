@@ -1,21 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <header>
-  <img src="images/logo.png" alt="Логотип студии" style="max-height: 80px;" />
-  <h1>Студия танца «Второе дыхание»</h1>
-  <p>Самара, от 3 до 14 лет — с любовью к каждому ребёнку</p>
-  <button class="btn" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'});">
-    Записаться на пробное
-  </button>
-</header>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Студия танца «Второе дыхание»</title>
   <style>
     body {
       margin: 0;
-      font-family: sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background-color: #fff;
       color: #222;
     }
@@ -25,8 +17,12 @@
       padding: 40px 20px;
       text-align: center;
     }
+    header img {
+      max-height: 90px;
+      margin-bottom: 15px;
+    }
     header h1 {
-      margin: 0;
+      margin: 10px 0 0 0;
       font-size: 2.5em;
     }
     header p {
@@ -45,8 +41,22 @@
     }
     section {
       padding: 40px 20px;
-      max-width: 800px;
+      max-width: 900px;
       margin: auto;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .gallery img {
+      width: 100%;
+      max-width: 280px;
+      border-radius: 10px;
     }
     .form-block input, .form-block textarea {
       width: 100%;
@@ -54,6 +64,7 @@
       margin: 10px 0;
       border: 1px solid #ccc;
       border-radius: 6px;
+      font-size: 1em;
     }
     .form-block button {
       background-color: #ff6f61;
@@ -70,11 +81,15 @@
       padding: 20px;
       font-size: 0.9em;
     }
+    a {
+      color: #ff6f61;
+    }
   </style>
 </head>
 <body>
 
   <header>
+    <img src="images/logo.png" alt="Логотип студии" />
     <h1>Студия танца «Второе дыхание»</h1>
     <p>Самара, от 3 до 14 лет — с любовью к каждому ребёнку</p>
     <button class="btn" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'});">Записаться на пробное</button>
@@ -85,9 +100,19 @@
     <ul>
       <li>Тёплую атмосферу и индивидуальный подход</li>
       <li>Гимнастику, современный и классический танец</li>
-      <li>Победы на конкурсах и концерты</li>
-      <li>Развитие пластики и уверенности</li>
+      <li>Победы на конкурсах и участие в концертах</li>
+      <li>Развитие пластики, уверенности и творчества</li>
     </ul>
+  </section>
+
+  <section>
+    <h2>Наша студия в кадре</h2>
+    <div class="gallery">
+      <img src="images/1.jpeg" alt="Дети на занятиях" />
+      <img src="images/2.jpg" alt="Выступление" />
+      <img src="images/3.jpeg" alt="Упражнения" />
+      <img src="images/4.jpeg" alt="Танец" />
+    </div>
   </section>
 
   <section>
@@ -117,10 +142,11 @@
     document.getElementById('tgForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
-      const name = document.getElementById('name').value;
+      const name = document.getElementById('name').
+value;
       const age = document.getElementById('age').value;
       const phone = document.getElementById('phone').value;
-      const message = `Новая заявка:\nИмя: ${name}\nВозраст ребёнка: ${age}\nТелефон: ${phone}`;
+      const message = Новая заявка:\nИмя: ${name}\nВозраст ребёнка: ${age}\nТелефон: ${phone};
 
       fetch('https://api.telegram.org/bot7613648654:AAEF344UUyxqWhcj4k43B0HA5hJmks3j9cg/sendMessage', {
         method: 'POST',
